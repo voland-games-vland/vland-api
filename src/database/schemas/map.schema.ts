@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Number } from 'mongoose';
 
 export type MapDocument = Map & Document;
 
@@ -23,14 +23,23 @@ export class Map {
 
   updatedAt: Date;
 
-  @Prop()
+  @Prop({required: true})
   name: string;
 
-  @Prop()
+  @Prop({
+    default: 2
+  })
   teams: number
 
-  @Prop()
+  @Prop({
+    default: 1000
+  })
   scoreToWin: number
+
+  @Prop({
+    default: 600
+  })
+  timeLimitInSeconds: number
 }
 
 export const MapSchema = SchemaFactory.createForClass(Map);
