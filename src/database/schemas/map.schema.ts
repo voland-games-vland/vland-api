@@ -24,10 +24,13 @@ export class Map {
   updatedAt: Date;
 
   @Prop()
-  title: string;
+  name: string;
 
   @Prop()
-  isDone: boolean
+  teams: number
+
+  @Prop()
+  scoreToWin: number
 }
 
 export const MapSchema = SchemaFactory.createForClass(Map);
