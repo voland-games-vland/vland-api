@@ -1,5 +1,7 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Number } from 'mongoose';
+import { Prop, raw, Schema, SchemaFactory } from '@nestjs/mongoose';
+import mongoose, { Document, Number } from 'mongoose';
+import { Block } from './block.schema';
+import { User } from './user.schema';
 
 export type MapDocument = Map & Document;
 
@@ -8,13 +10,8 @@ export type MapDocument = Map & Document;
     createdAt: true,
     updatedAt: true,
   },
-  toJSON: {
-    virtuals: true,
-  },
 })
 export class Map {
-  id: string;
-  
   _id: string;
 
   __v: string;
@@ -23,23 +20,29 @@ export class Map {
 
   updatedAt: Date;
 
-  @Prop({required: true})
+  @Prop({ required: true })
   name: string;
 
-  @Prop({
-    default: 2
-  })
-  teams: number
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null })
+  owner: User;
+
+  @Prop(
+    raw({
+      teams: { type: Number, default: 2 },
+      scoreToWin: { type: Number, default: 1000 },
+      timeLimitInSeconds: { type: Number, default: 600 },
+    }),
+  )
+  settings: {
+    teams: number;
+    scoreToWin: number;
+    timeLimitInSeconds: number;
+  };
 
   @Prop({
-    default: 1000
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Block', auto: true }],
   })
-  scoreToWin: number
-
-  @Prop({
-    default: 600
-  })
-  timeLimitInSeconds: number
+  blocks: Block[];
 }
 
 export const MapSchema = SchemaFactory.createForClass(Map);

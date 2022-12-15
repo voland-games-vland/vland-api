@@ -9,7 +9,7 @@ import { MapsModule } from './maps/maps.module';
   imports: [
     ConfigModule.forRoot({ load: [configuration], isGlobal: true }),
     DatabaseModule,
-    MapsModule
+    MapsModule,
   ],
   controllers: [AppController],
   providers: [],

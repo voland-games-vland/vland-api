@@ -1,3 +1,3 @@
 export class CreateMapDto {
-    name: string;
+  name: string;
 }

@@ -15,7 +15,9 @@ describe('AppController', () => {
 
   describe('root', () => {
     it('should return "<h1>vland api</h1><p>running...</p>"', () => {
-      expect(appController.getHello()).toBe('<h1>vland api</h1><p>running...</p>');
+      expect(appController.getHello()).toBe(
+        '<h1>vland api</h1><p>running...</p>',
+      );
     });
   });
 });
