@@ -1,5 +1,5 @@
 import { Prop, raw, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { Document, Number } from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 import { Block } from './block.schema';
 import { User } from './user.schema';
 
@@ -38,11 +38,6 @@ export class Map {
     scoreToWin: number;
     timeLimitInSeconds: number;
   };
-
-  @Prop({
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Block', auto: true }],
-  })
-  blocks: Block[];
 }
 
 export const MapSchema = SchemaFactory.createForClass(Map);
