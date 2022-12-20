@@ -6,14 +6,14 @@ import { Position } from './position.schema';
 export type BlockDocument = Block & Document;
 
 export enum Blocks {
-  Stone,
-  Grass,
-  Dirt,
-  Wood,
-  Bridge,
-  Snow,
-  Sand,
-  Water,
+  Stone = 'Stone',
+  Grass = 'Grass',
+  Dirt = 'Dirt',
+  Wood = 'Wood',
+  Bridge = 'Bridge',
+  Snow = 'Snow',
+  Sand = 'Sand',
+  Water = 'Water',
 }
 
 @Schema()

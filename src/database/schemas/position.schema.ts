@@ -8,8 +8,8 @@ export class Position {
   x: number;
 
   @Prop({ required: true })
-  z: number;
+  y: number;
 
   @Prop({ required: true })
-  y: number;
+  z: number;
 }

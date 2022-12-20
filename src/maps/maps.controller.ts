@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
+import { BlocksService } from 'src/blocks/blocks.service';
 import { Map } from 'src/database/schemas/map.schema';
 import { CreateMapDto } from './dto/create-map.dto';
 import { UpdateMapDto } from './dto/update-map.dto';
@@ -14,7 +15,10 @@ import { MapsService } from './maps.service';
 
 @Controller('maps')
 export class MapsController {
-  constructor(private readonly mapsService: MapsService) {}
+  constructor(
+    private readonly mapsService: MapsService,
+    private readonly blocksService: BlocksService
+  ) {}
 
   @Post()
   async create(@Body() createMapDto: CreateMapDto) {
@@ -39,5 +43,12 @@ export class MapsController {
   @Delete(':id')
   async remove(@Param('id') id: string) {
     return (await this.mapsService.remove(id)) as Map;
+  }
+
+  @Get(':id/blocks')
+  async getBlocks(@Param('id') id: string) {
+    return await this.blocksService.findAll({
+      map: id
+    })
   }
 }

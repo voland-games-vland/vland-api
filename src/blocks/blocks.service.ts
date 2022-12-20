@@ -4,6 +4,8 @@ import { FilterQuery, Model } from 'mongoose';
 import { Block, BlockDocument } from 'src/database/schemas/block.schema';
 import { Map, MapDocument } from 'src/database/schemas/map.schema';
 import { Position } from 'src/database/schemas/position.schema';
+import { DeleteBlockDto } from './dto/delete-block.dto';
+import { PutBlockDto } from './dto/put-block.dto';
 
 @Injectable()
 export class BlocksService {
@@ -14,29 +16,44 @@ export class BlocksService {
     private readonly mapModel: Model<MapDocument>
   ) {}
 
-  async create() {
-    const block = new this.blockModel()
-    block.map = await this.mapModel.findById('639938cdfa1da8635e28e91c').exec()
-    block.position = new Position()
-    block.position.x = 0
-    block.position.y = 1
-    block.position.z = 0
-    return await block.save();
+  async put(putBlockDto: PutBlockDto) {
+    const map = await this.mapModel.findById(putBlockDto.mapId).exec()
+    if(!map) throw Error('Map not Found')
+
+    const block = await this.blockModel.findOne({
+      map: putBlockDto.mapId,
+      'position.x': putBlockDto.position.x,
+      'position.y': putBlockDto.position.y,
+      'position.z': putBlockDto.position.z
+    }).exec()
+    if (block) {
+      block.type = putBlockDto.type
+      block.position.x = putBlockDto.position.x
+      block.position.y = putBlockDto.position.y
+      block.position.z = putBlockDto.position.z
+      return await block.save()
+    }
+
+    const newBlock = new this.blockModel()
+    newBlock.type = putBlockDto.type
+    newBlock.position = new Position()
+    newBlock.position.x = putBlockDto.position.x
+    newBlock.position.y = putBlockDto.position.y
+    newBlock.position.z = putBlockDto.position.z
+    newBlock.map = map
+    return await newBlock.save()
   }
 
   async findAll(query: FilterQuery<BlockDocument> = {}) {
     return await this.blockModel.find(query).exec();
   }
 
-  async findOne(id: string) {
-    return await this.blockModel
-      .findById(id, null, {
-        populate: 'blocks',
-      })
-      .exec();
-  }
-
-  async remove(id: string) {
-    return await this.blockModel.findByIdAndRemove(id);
+  async remove(deleteBlockDto: DeleteBlockDto) {
+    return await this.blockModel.findOneAndRemove({
+      map: deleteBlockDto.mapId,
+      'position.x': deleteBlockDto.position.x,
+      'position.y': deleteBlockDto.position.y,
+      'position.z': deleteBlockDto.position.z
+    }).exec()
   }
 }
