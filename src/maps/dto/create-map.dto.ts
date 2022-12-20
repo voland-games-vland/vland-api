@@ -1,8 +1,12 @@
+export enum Size {
+  XS = 'XS',
+  S = 'S',
+  M = 'M',
+  L = 'L',
+  XL = 'XL',
+}
+
 export class CreateMapDto {
-  name: string;
-  settings: {
-    teams?: number
-    scoreToWin?: number
-    timeLimitInSeconds?: number
-  }
+  name: string
+  size: Size = Size.M
 }
