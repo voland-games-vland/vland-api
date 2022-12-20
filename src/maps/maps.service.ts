@@ -17,31 +17,31 @@ export class MapsService {
   ) {}
 
   async create(createMapDto: CreateMapDto) {
-    const newMap = new this.mapModel(createMapDto)
-    switch(createMapDto.size) {
+    const newMap = new this.mapModel(createMapDto);
+    switch (createMapDto.size) {
       case Size.XS: {
-        newMap.width = 15
-        newMap.height = 9
+        newMap.width = 15;
+        newMap.height = 9;
         break;
       }
       case Size.S: {
-        newMap.width = 31
-        newMap.height = 21
+        newMap.width = 31;
+        newMap.height = 21;
         break;
       }
       case Size.M: {
-        newMap.width = 45
-        newMap.height = 31
+        newMap.width = 45;
+        newMap.height = 31;
         break;
       }
       case Size.L: {
-        newMap.width = 61
-        newMap.height = 41
+        newMap.width = 61;
+        newMap.height = 41;
         break;
       }
       case Size.XL: {
-        newMap.width = 75
-        newMap.height = 51
+        newMap.width = 75;
+        newMap.height = 51;
         break;
       }
     }

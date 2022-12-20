@@ -7,6 +7,6 @@ export enum Size {
 }
 
 export class CreateMapDto {
-  name: string
-  size: Size = Size.M
+  name: string;
+  size: Size = Size.M;
 }

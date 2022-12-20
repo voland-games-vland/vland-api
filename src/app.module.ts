@@ -6,6 +6,8 @@ import { DatabaseModule } from './database/database.module';
 import { MapsModule } from './maps/maps.module';
 import { BlocksModule } from './blocks/blocks.module';
 import { UsersModule } from './users/users.module';
+import { BearerStrategy } from './guards/bearer.guard';
+import { AnonymousStrategy } from './guards/anonymous.guard';
 
 @Module({
   imports: [
@@ -13,9 +15,9 @@ import { UsersModule } from './users/users.module';
     DatabaseModule,
     MapsModule,
     BlocksModule,
-    UsersModule
+    UsersModule,
   ],
   controllers: [AppController],
-  providers: [],
+  providers: [BearerStrategy, AnonymousStrategy],
 })
 export class AppModule {}

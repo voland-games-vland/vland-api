@@ -38,11 +38,11 @@ export class Map {
     timeLimitInSeconds: number;
   };
 
-  @Prop({ default: 30})
-  width: number
+  @Prop({ default: 30 })
+  width: number;
 
-  @Prop({default: 20})
-  height: number
+  @Prop({ default: 20 })
+  height: number;
 }
 
 export const MapSchema = SchemaFactory.createForClass(Map);

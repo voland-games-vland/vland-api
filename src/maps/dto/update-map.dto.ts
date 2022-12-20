@@ -1,8 +1,8 @@
 export class UpdateMapDto {
-  name: string
+  name: string;
   settings: {
-    teams: number
-    scoreToWin: number
-    timeLimitInSeconds: number
-  }
+    teams: number;
+    scoreToWin: number;
+    timeLimitInSeconds: number;
+  };
 }

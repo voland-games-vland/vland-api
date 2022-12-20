@@ -1,10 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { FilterQuery, Model } from 'mongoose';
-import { Block, BlockDocument } from 'src/database/schemas/block.schema';
-import { Position } from 'src/database/schemas/position.schema';
+import { Model } from 'mongoose';
 import { User, UserDocument } from 'src/database/schemas/user.schema';
-
 
 @Injectable()
 export class UsersService {
@@ -14,8 +11,19 @@ export class UsersService {
   ) {}
 
   async getUserByUid(uid: string) {
-    return this.userModel.findOne({
-        uid: uid
-    }).exec()
+    const user = await this.userModel
+      .findOne({
+        uid: uid,
+      })
+      .exec();
+
+    if (user) return user;
+
+    const newUser = new this.userModel({
+      uid: uid,
+    });
+    console.log(newUser);
+    await newUser.save();
+    return newUser;
   }
 }

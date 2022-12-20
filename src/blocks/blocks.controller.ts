@@ -1,8 +1,4 @@
-import {
-  Controller,
-  Body,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Body, Delete } from '@nestjs/common';
 import { Put } from '@nestjs/common/decorators';
 import { Block } from 'src/database/schemas/block.schema';
 import { BlocksService } from './blocks.service';
