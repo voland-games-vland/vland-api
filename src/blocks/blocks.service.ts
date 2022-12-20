@@ -13,35 +13,37 @@ export class BlocksService {
     @InjectModel(Block.name)
     private readonly blockModel: Model<BlockDocument>,
     @InjectModel(Map.name)
-    private readonly mapModel: Model<MapDocument>
+    private readonly mapModel: Model<MapDocument>,
   ) {}
 
   async put(putBlockDto: PutBlockDto) {
-    const map = await this.mapModel.findById(putBlockDto.mapId).exec()
-    if(!map) throw Error('Map not Found')
+    const map = await this.mapModel.findById(putBlockDto.mapId).exec();
+    if (!map) throw Error('Map not Found');
 
-    const block = await this.blockModel.findOne({
-      map: putBlockDto.mapId,
-      'position.x': putBlockDto.position.x,
-      'position.y': putBlockDto.position.y,
-      'position.z': putBlockDto.position.z
-    }).exec()
+    const block = await this.blockModel
+      .findOne({
+        map: putBlockDto.mapId,
+        'position.x': putBlockDto.position.x,
+        'position.y': putBlockDto.position.y,
+        'position.z': putBlockDto.position.z,
+      })
+      .exec();
     if (block) {
-      block.type = putBlockDto.type
-      block.position.x = putBlockDto.position.x
-      block.position.y = putBlockDto.position.y
-      block.position.z = putBlockDto.position.z
-      return await block.save()
+      block.type = putBlockDto.type;
+      block.position.x = putBlockDto.position.x;
+      block.position.y = putBlockDto.position.y;
+      block.position.z = putBlockDto.position.z;
+      return await block.save();
     }
 
-    const newBlock = new this.blockModel()
-    newBlock.type = putBlockDto.type
-    newBlock.position = new Position()
-    newBlock.position.x = putBlockDto.position.x
-    newBlock.position.y = putBlockDto.position.y
-    newBlock.position.z = putBlockDto.position.z
-    newBlock.map = map
-    return await newBlock.save()
+    const newBlock = new this.blockModel();
+    newBlock.type = putBlockDto.type;
+    newBlock.position = new Position();
+    newBlock.position.x = putBlockDto.position.x;
+    newBlock.position.y = putBlockDto.position.y;
+    newBlock.position.z = putBlockDto.position.z;
+    newBlock.map = map;
+    return await newBlock.save();
   }
 
   async findAll(query: FilterQuery<BlockDocument> = {}) {
@@ -49,11 +51,13 @@ export class BlocksService {
   }
 
   async remove(deleteBlockDto: DeleteBlockDto) {
-    return await this.blockModel.findOneAndRemove({
-      map: deleteBlockDto.mapId,
-      'position.x': deleteBlockDto.position.x,
-      'position.y': deleteBlockDto.position.y,
-      'position.z': deleteBlockDto.position.z
-    }).exec()
+    return await this.blockModel
+      .findOneAndRemove({
+        map: deleteBlockDto.mapId,
+        'position.x': deleteBlockDto.position.x,
+        'position.y': deleteBlockDto.position.y,
+        'position.z': deleteBlockDto.position.z,
+      })
+      .exec();
   }
 }

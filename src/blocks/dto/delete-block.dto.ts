@@ -1,7 +1,6 @@
-import { Position } from "src/database/schemas/position.schema";
+import { Position } from 'src/database/schemas/position.schema';
 
 export class DeleteBlockDto {
-    position: Position;
-    mapId: string
+  position: Position;
+  mapId: string;
 }
-  

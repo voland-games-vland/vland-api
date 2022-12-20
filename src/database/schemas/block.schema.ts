@@ -32,4 +32,4 @@ export class Block {
 
 export const BlockSchema = SchemaFactory.createForClass(Block);
 
-BlockSchema.index({ position: 1, map: 1}, { unique: true})
+BlockSchema.index({ position: 1, map: 1 }, { unique: true });

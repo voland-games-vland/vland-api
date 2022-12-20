@@ -17,7 +17,7 @@ import { MapsService } from './maps.service';
 export class MapsController {
   constructor(
     private readonly mapsService: MapsService,
-    private readonly blocksService: BlocksService
+    private readonly blocksService: BlocksService,
   ) {}
 
   @Post()
@@ -48,7 +48,7 @@ export class MapsController {
   @Get(':id/blocks')
   async getBlocks(@Param('id') id: string) {
     return await this.blocksService.findAll({
-      map: id
-    })
+      map: id,
+    });
   }
 }

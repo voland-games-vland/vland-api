@@ -11,7 +11,7 @@ import { BlocksModule } from './blocks/blocks.module';
     ConfigModule.forRoot({ load: [configuration], isGlobal: true }),
     DatabaseModule,
     MapsModule,
-    BlocksModule
+    BlocksModule,
   ],
   controllers: [AppController],
   providers: [],
