@@ -1,6 +1,6 @@
 export class CreateMapDto {
   name: string;
-  settings: {
+  settings?: {
     teams?: number
     scoreToWin?: number
     timeLimitInSeconds?: number
