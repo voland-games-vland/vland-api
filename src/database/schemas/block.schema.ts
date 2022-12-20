@@ -27,7 +27,7 @@ export class Block {
   position: Position;
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Map' })
-  map: Map;
+  map: mongoose.Schema.Types.ObjectId;
 }
 
 export const BlockSchema = SchemaFactory.createForClass(Block);

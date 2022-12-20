@@ -23,7 +23,7 @@ export class Map {
   name: string;
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null })
-  owner?: User;
+  owner?: mongoose.Schema.Types.ObjectId;
 
   @Prop(
     raw({

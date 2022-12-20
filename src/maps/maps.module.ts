@@ -8,5 +8,6 @@ import { BlocksModule } from 'src/blocks/blocks.module';
   imports: [DatabaseModule, BlocksModule],
   controllers: [MapsController],
   providers: [MapsService],
+  exports: [MapsService]
 })
 export class MapsModule {}

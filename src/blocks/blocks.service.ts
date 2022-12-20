@@ -42,7 +42,7 @@ export class BlocksService {
     newBlock.position.x = putBlockDto.position.x;
     newBlock.position.y = putBlockDto.position.y;
     newBlock.position.z = putBlockDto.position.z;
-    newBlock.map = map;
+    newBlock.map = map._id;
     return await newBlock.save();
   }
 
