@@ -21,27 +21,27 @@ export class MapsService {
     switch(createMapDto.size) {
       case Size.XS: {
         newMap.width = 15
-        newMap.height = 10
+        newMap.height = 9
         break;
       }
       case Size.S: {
-        newMap.width = 30
-        newMap.height = 20
+        newMap.width = 31
+        newMap.height = 21
         break;
       }
       case Size.M: {
         newMap.width = 45
-        newMap.height = 30
+        newMap.height = 31
         break;
       }
       case Size.L: {
-        newMap.width = 60
-        newMap.height = 40
+        newMap.width = 61
+        newMap.height = 41
         break;
       }
       case Size.XL: {
         newMap.width = 75
-        newMap.height = 50
+        newMap.height = 51
         break;
       }
     }
