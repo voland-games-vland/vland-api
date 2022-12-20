@@ -54,9 +54,7 @@ export class MapsService {
 
   async findOne(id: string) {
     return await this.mapModel
-      .findById(id, null, {
-        populate: 'blocks',
-      })
+      .findById(id)
       .exec();
   }
 
