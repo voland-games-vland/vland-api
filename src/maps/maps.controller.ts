@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { BlocksService } from 'src/blocks/blocks.service';
 import { Map } from 'src/database/schemas/map.schema';
+import { ParseObjectIdPipe } from 'src/pipes/parseObjectId.pipe';
 import { CreateMapDto } from './dto/create-map.dto';
 import { UpdateMapDto } from './dto/update-map.dto';
 import { MapsService } from './maps.service';
@@ -31,22 +32,22 @@ export class MapsController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string) {
+  async findOne(@Param('id', ParseObjectIdPipe) id: string) {
     return (await this.mapsService.findOne(id)) as Map;
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() updateMapDto: UpdateMapDto) {
+  async update(@Param('id', ParseObjectIdPipe) id: string, @Body() updateMapDto: UpdateMapDto) {
     return (await this.mapsService.update(id, updateMapDto)) as Map;
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string) {
+  async remove(@Param('id', ParseObjectIdPipe) id: string) {
     return (await this.mapsService.remove(id)) as Map;
   }
 
   @Get(':id/blocks')
-  async getBlocks(@Param('id') id: string) {
+  async getBlocks(@Param('id', ParseObjectIdPipe) id: string) {
     return await this.blocksService.findAll({
       map: id,
     });

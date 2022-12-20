@@ -6,6 +6,7 @@ import { UserData } from 'src/decorators/user.decorator';
 import { BearerGuard } from 'src/guards/bearer.guard';
 import { FirebaseUser } from 'src/guards/firebaseUser.type';
 import { MapsService } from 'src/maps/maps.service';
+import { ParseObjectIdPipe } from 'src/pipes/parseObjectId.pipe';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -21,7 +22,7 @@ export class UsersController {
   }
 
   @Get(':id/maps')
-  async getMeMaps(@Param('id') id: string) {
+  async getMeMaps(@Param('id', ParseObjectIdPipe) id: string) {
     const maps = await this.mapsService.findAll({
         owner: id
     })
