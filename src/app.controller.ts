@@ -4,7 +4,7 @@ import { Controller, Get } from '@nestjs/common';
 export class AppController {
   @Get()
   getHello(): string {
-    return '<h1>vland api</h1><p>running...</p>';
+    return '<h1>vland api</h1><p>running...</p><p><a href="/api">Swagger Docs</a>';
   }
 
   @Get('/swag')
