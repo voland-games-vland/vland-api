@@ -1,4 +1,4 @@
-import { Controller, Get, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { Map } from 'src/database/schemas/map.schema';
 import { User } from 'src/database/schemas/user.schema';
@@ -20,13 +20,10 @@ export class UsersController {
     return userMe as User;
   }
 
-  @Get('me/maps')
-  @UseGuards(BearerGuard)
-  @ApiBearerAuth('Firebase Authentication')
-  async getMeMaps(@UserData() user: FirebaseUser) {
-    const userMe = await this.usersService.getUserByUid(user.uid);
+  @Get(':id/maps')
+  async getMeMaps(@Param('id') id: string) {
     const maps = await this.mapsService.findAll({
-        owner: userMe.id
+        owner: id
     })
     return maps as Map[];
   }
