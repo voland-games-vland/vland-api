@@ -16,7 +16,7 @@ export class MapsService {
     private readonly blockModel: Model<BlockDocument>,
   ) {}
 
-  async create(createMapDto: CreateMapDto) {
+  async create(createMapDto: CreateMapDto, owner?: string) {
     const newMap = new this.mapModel(createMapDto);
     switch (createMapDto.size) {
       case Size.XS: {
@@ -45,6 +45,7 @@ export class MapsService {
         break;
       }
     }
+    newMap.owner = owner
     return await newMap.save();
   }
 

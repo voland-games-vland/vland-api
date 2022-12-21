@@ -1,12 +1,13 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { DatabaseModule } from 'src/database/database.module';
 import { MapsModule } from 'src/maps/maps.module';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 
 @Module({
-  imports: [DatabaseModule, MapsModule],
+  imports: [DatabaseModule, forwardRef(() => MapsModule)],
   controllers: [UsersController],
   providers: [UsersService],
+  exports: [UsersService]
 })
 export class UsersModule {}

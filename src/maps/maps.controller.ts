@@ -6,10 +6,16 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
+import { ApiBearerAuth } from '@nestjs/swagger';
 import { BlocksService } from 'src/blocks/blocks.service';
 import { Map } from 'src/database/schemas/map.schema';
+import { UserData } from 'src/decorators/user.decorator';
+import { BearerGuard } from 'src/guards/bearer.guard';
+import { FirebaseUser } from 'src/guards/firebaseUser.type';
 import { ParseObjectIdPipe } from 'src/pipes/parseObjectId.pipe';
+import { UsersService } from 'src/users/users.service';
 import { CreateMapDto } from './dto/create-map.dto';
 import { UpdateMapDto } from './dto/update-map.dto';
 import { MapsService } from './maps.service';
@@ -19,11 +25,15 @@ export class MapsController {
   constructor(
     private readonly mapsService: MapsService,
     private readonly blocksService: BlocksService,
+    private readonly usersService: UsersService
   ) {}
 
   @Post()
-  async create(@Body() createMapDto: CreateMapDto) {
-    return (await this.mapsService.create(createMapDto)) as Map;
+  @UseGuards(BearerGuard)
+  @ApiBearerAuth('Firebase Authentication')
+  async create(@UserData() firebaseUser: FirebaseUser, @Body() createMapDto: CreateMapDto) {
+    const user = await this.usersService.getUserByUid(firebaseUser.uid)
+    return (await this.mapsService.create(createMapDto, user._id)) as Map;
   }
 
   @Get()
