@@ -22,7 +22,6 @@ export class UsersService {
     const newUser = new this.userModel({
       uid: uid,
     });
-    console.log(newUser);
     await newUser.save();
     return newUser;
   }
