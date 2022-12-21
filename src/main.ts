@@ -1,11 +1,24 @@
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import * as admin from 'firebase-admin';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
+
   const app = await NestFactory.create(AppModule);
   const configService = app.get<ConfigService>(ConfigService);
+  
+  const adminConfig: admin.ServiceAccount = {
+    projectId: configService.get('firebase.projectId'),
+    privateKey: configService.get('firebase.privateKey').replace(/\\n/g, '\n'),
+    clientEmail: configService.get('firebase.clientEmail'),
+  };
+
+  admin.initializeApp({
+    credential: admin.credential.cert(adminConfig)
+  });
+
   const configSwagger = new DocumentBuilder()
     .setTitle('vland Api')
     .setVersion('1.0')
