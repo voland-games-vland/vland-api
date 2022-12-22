@@ -17,12 +17,12 @@ export class BlocksService {
   ) {}
 
   async put(putBlockDto: PutBlockDto) {
-    const map = await this.mapModel.findById(putBlockDto.mapId).exec();
+    const map = await this.mapModel.findById(putBlockDto.map).exec();
     if (!map) throw Error('Map not Found');
 
     const block = await this.blockModel
       .findOne({
-        map: putBlockDto.mapId,
+        map: putBlockDto.map,
         'position.x': putBlockDto.position.x,
         'position.y': putBlockDto.position.y,
         'position.z': putBlockDto.position.z,
@@ -53,7 +53,7 @@ export class BlocksService {
   async remove(deleteBlockDto: DeleteBlockDto) {
     return await this.blockModel
       .findOneAndRemove({
-        map: deleteBlockDto.mapId,
+        map: deleteBlockDto.map,
         'position.x': deleteBlockDto.position.x,
         'position.y': deleteBlockDto.position.y,
         'position.z': deleteBlockDto.position.z,

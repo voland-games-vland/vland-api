@@ -4,5 +4,5 @@ import { Position } from 'src/database/schemas/position.schema';
 export class PutBlockDto {
   type: Blocks;
   position: Position;
-  mapId: string;
+  map: string;
 }
