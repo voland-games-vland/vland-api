@@ -11,7 +11,10 @@ import { UsersService } from './users.service';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService, private readonly mapsService: MapsService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly mapsService: MapsService,
+  ) {}
 
   @Get('me')
   @UseGuards(BearerGuard)
@@ -24,8 +27,8 @@ export class UsersController {
   @Get(':id/maps')
   async getMeMaps(@Param('id', ParseObjectIdPipe) id: string) {
     const maps = await this.mapsService.findAll({
-        owner: id
-    })
+      owner: id,
+    });
     return maps as Map[];
   }
 }

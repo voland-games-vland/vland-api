@@ -9,6 +9,6 @@ import { UsersModule } from 'src/users/users.module';
   imports: [DatabaseModule, BlocksModule, forwardRef(() => UsersModule)],
   controllers: [MapsController],
   providers: [MapsService],
-  exports: [MapsService]
+  exports: [MapsService],
 })
 export class MapsModule {}

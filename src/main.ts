@@ -5,10 +5,9 @@ import * as admin from 'firebase-admin';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-
   const app = await NestFactory.create(AppModule);
   const configService = app.get<ConfigService>(ConfigService);
-  
+
   const adminConfig: admin.ServiceAccount = {
     projectId: configService.get('firebase.projectId'),
     privateKey: configService.get('firebase.privateKey').replace(/\\n/g, '\n'),
@@ -16,7 +15,7 @@ async function bootstrap() {
   };
 
   admin.initializeApp({
-    credential: admin.credential.cert(adminConfig)
+    credential: admin.credential.cert(adminConfig),
   });
 
   const configSwagger = new DocumentBuilder()

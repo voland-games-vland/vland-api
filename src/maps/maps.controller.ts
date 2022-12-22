@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { BlocksService } from 'src/blocks/blocks.service';
+import { Block } from 'src/database/schemas/block.schema';
 import { Map } from 'src/database/schemas/map.schema';
 import { UserData } from 'src/decorators/user.decorator';
 import { BearerGuard } from 'src/guards/bearer.guard';
@@ -25,14 +26,17 @@ export class MapsController {
   constructor(
     private readonly mapsService: MapsService,
     private readonly blocksService: BlocksService,
-    private readonly usersService: UsersService
+    private readonly usersService: UsersService,
   ) {}
 
   @Post()
   @UseGuards(BearerGuard)
   @ApiBearerAuth('Firebase Authentication')
-  async create(@UserData() firebaseUser: FirebaseUser, @Body() createMapDto: CreateMapDto) {
-    const user = await this.usersService.getUserByUid(firebaseUser.uid)
+  async create(
+    @UserData() firebaseUser: FirebaseUser,
+    @Body() createMapDto: CreateMapDto,
+  ) {
+    const user = await this.usersService.getUserByUid(firebaseUser.uid);
     return (await this.mapsService.create(createMapDto, user._id)) as Map;
   }
 
@@ -47,7 +51,10 @@ export class MapsController {
   }
 
   @Patch(':id')
-  async update(@Param('id', ParseObjectIdPipe) id: string, @Body() updateMapDto: UpdateMapDto) {
+  async update(
+    @Param('id', ParseObjectIdPipe) id: string,
+    @Body() updateMapDto: UpdateMapDto,
+  ) {
     return (await this.mapsService.update(id, updateMapDto)) as Map;
   }
 
@@ -58,8 +65,8 @@ export class MapsController {
 
   @Get(':id/blocks')
   async getBlocks(@Param('id', ParseObjectIdPipe) id: string) {
-    return await this.blocksService.findAll({
+    return (await this.blocksService.findAll({
       map: id,
-    });
+    })) as Block[];
   }
 }

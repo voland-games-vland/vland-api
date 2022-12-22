@@ -45,7 +45,7 @@ export class MapsService {
         break;
       }
     }
-    newMap.owner = owner
+    newMap.owner = owner;
     return await newMap.save();
   }
 
@@ -54,9 +54,7 @@ export class MapsService {
   }
 
   async findOne(id: string) {
-    return await this.mapModel
-      .findById(id)
-      .exec();
+    return await this.mapModel.findById(id).exec();
   }
 
   async update(id: string, updateMapDto: UpdateMapDto) {
