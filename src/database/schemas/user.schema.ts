@@ -8,6 +8,9 @@ export type UserDocument = User & Document;
     createdAt: true,
     updatedAt: true,
   },
+  toJSON: {
+    virtuals: true
+  }
 })
 export class User {
   _id: string;
@@ -29,8 +32,16 @@ export class User {
 
   @Prop({ default: 'User' })
   nickname: string;
+
+  @Prop({ default: 0})
+  xp: number
+
+  level: number
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
 UserSchema.index({ createdAt: -1 });
 UserSchema.index({ updatedAt: -1 });
+UserSchema.virtual('level').get(function (this: UserDocument) {
+  return 5
+})
