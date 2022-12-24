@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Block, BlockSchema } from './schemas/block.schema';
+import { Building, BuildingSchema } from './schemas/building.schema';
 import { Map, MapSchema } from './schemas/map.schema';
 import { User, UserSchema } from './schemas/user.schema';
 
@@ -20,19 +21,19 @@ import { User, UserSchema } from './schemas/user.schema';
         name: Map.name,
         schema: MapSchema,
       },
-    ]),
-    MongooseModule.forFeature([
       {
         name: Block.name,
         schema: BlockSchema,
       },
-    ]),
-    MongooseModule.forFeature([
       {
         name: User.name,
         schema: UserSchema,
       },
-    ]),
+      {
+        name: Building.name,
+        schema: BuildingSchema,
+      },
+    ])
   ],
   exports: [MongooseModule],
 })
