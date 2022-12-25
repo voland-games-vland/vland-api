@@ -43,5 +43,17 @@ export const UserSchema = SchemaFactory.createForClass(User);
 UserSchema.index({ createdAt: -1 });
 UserSchema.index({ updatedAt: -1 });
 UserSchema.virtual('level').get(function (this: UserDocument) {
-  return 5
+
+  const calculatePlayerLevel = (xp: number): number => {
+    let level = 1;
+    let xpForNextLevel = 100;
+    while (xp >= xpForNextLevel) {
+      xp -= xpForNextLevel;
+      xpForNextLevel += 100 * level;
+      level++;
+    }
+    return level;
+  }
+
+  return calculatePlayerLevel(this.xp)
 })
