@@ -4,7 +4,9 @@ import { Block } from 'src/database/schemas/block.schema';
 import { BlocksService } from './blocks.service';
 import { DeleteBlockDto } from './dto/delete-block.dto';
 import { PutBlockDto } from './dto/put-block.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('blocks')
 @Controller('blocks')
 export class BlocksController {
   constructor(private readonly blocksService: BlocksService) {}

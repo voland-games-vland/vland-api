@@ -8,7 +8,7 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { BlocksService } from 'src/blocks/blocks.service';
 import { Block } from 'src/database/schemas/block.schema';
 import { Map } from 'src/database/schemas/map.schema';
@@ -21,6 +21,7 @@ import { CreateMapDto } from './dto/create-map.dto';
 import { UpdateMapDto } from './dto/update-map.dto';
 import { MapsService } from './maps.service';
 
+@ApiTags('maps')
 @Controller('maps')
 export class MapsController {
   constructor(

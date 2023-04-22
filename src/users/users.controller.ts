@@ -1,5 +1,5 @@
 import { Controller, Get, Param, UseGuards } from '@nestjs/common';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Map } from 'src/database/schemas/map.schema';
 import { User } from 'src/database/schemas/user.schema';
 import { UserData } from 'src/decorators/user.decorator';
@@ -9,6 +9,7 @@ import { MapsService } from 'src/maps/maps.service';
 import { ParseObjectIdPipe } from 'src/pipes/parseObjectId.pipe';
 import { UsersService } from './users.service';
 
+@ApiTags('users')
 @Controller('users')
 export class UsersController {
   constructor(
