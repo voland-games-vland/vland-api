@@ -15,7 +15,12 @@ export enum Buildings {
 export class Building {
   _id: string;
 
-  @Prop({ type: String, enum: Buildings, required: true, default: Buildings.Spawn })
+  @Prop({
+    type: String,
+    enum: Buildings,
+    required: true,
+    default: Buildings.Spawn,
+  })
   type: Buildings;
 
   @Prop({ type: Position, required: true })

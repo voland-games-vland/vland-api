@@ -3,6 +3,7 @@ import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import * as admin from 'firebase-admin';
 import { AppModule } from './app.module';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -41,6 +42,7 @@ async function bootstrap() {
   });
 
   app.enableCors();
+  app.useGlobalPipes(new ValidationPipe());
 
   const port = configService.get('port');
   await app.listen(port);

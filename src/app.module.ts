@@ -8,6 +8,7 @@ import { BlocksModule } from './blocks/blocks.module';
 import { UsersModule } from './users/users.module';
 import { BearerStrategy } from './guards/bearer.guard';
 import { AnonymousStrategy } from './guards/anonymous.guard';
+import { BuildingsModule } from './buildings/buildings.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { AnonymousStrategy } from './guards/anonymous.guard';
     MapsModule,
     BlocksModule,
     UsersModule,
+    BuildingsModule,
   ],
   controllers: [AppController],
   providers: [BearerStrategy, AnonymousStrategy],

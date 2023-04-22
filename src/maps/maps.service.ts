@@ -65,8 +65,8 @@ export class MapsService {
 
   async remove(id: string) {
     await this.blockModel.deleteMany({
-      map: id
-    })
+      map: id,
+    });
     return await this.mapModel.findByIdAndRemove(id);
   }
 }

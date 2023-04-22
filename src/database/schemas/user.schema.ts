@@ -9,8 +9,8 @@ export type UserDocument = User & Document;
     updatedAt: true,
   },
   toJSON: {
-    virtuals: true
-  }
+    virtuals: true,
+  },
 })
 export class User {
   _id: string;
@@ -33,17 +33,16 @@ export class User {
   @Prop({ default: 'User' })
   nickname: string;
 
-  @Prop({ default: 0})
-  xp: number
+  @Prop({ default: 0 })
+  xp: number;
 
-  level: number
+  level: number;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
 UserSchema.index({ createdAt: -1 });
 UserSchema.index({ updatedAt: -1 });
 UserSchema.virtual('level').get(function (this: UserDocument) {
-
   const calculatePlayerLevel = (xp: number): number => {
     let level = 1;
     let xpForNextLevel = 100;
@@ -53,7 +52,7 @@ UserSchema.virtual('level').get(function (this: UserDocument) {
       level++;
     }
     return level;
-  }
+  };
 
-  return calculatePlayerLevel(this.xp)
-})
+  return calculatePlayerLevel(this.xp);
+});

@@ -33,7 +33,7 @@ import { User, UserSchema } from './schemas/user.schema';
         name: Building.name,
         schema: BuildingSchema,
       },
-    ])
+    ]),
   ],
   exports: [MongooseModule],
 })
