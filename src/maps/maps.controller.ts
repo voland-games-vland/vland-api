@@ -20,6 +20,8 @@ import { UsersService } from 'src/users/users.service';
 import { MapCreateDto } from './dto/map-create.dto';
 import { MapUpdateDto } from './dto/map-update.dto';
 import { MapsService } from './maps.service';
+import { BuildingsService } from 'src/buildings/buildings.service';
+import { Building } from 'src/database/schemas/building.schema';
 
 @ApiTags('maps')
 @Controller('maps')
@@ -28,6 +30,7 @@ export class MapsController {
     private readonly mapsService: MapsService,
     private readonly blocksService: BlocksService,
     private readonly usersService: UsersService,
+    private readonly buildingsService: BuildingsService,
   ) {}
 
   @Post()
@@ -69,5 +72,12 @@ export class MapsController {
     return (await this.blocksService.findAll({
       map: id,
     })) as Block[];
+  }
+
+  @Get(':id/buildings')
+  async getBuildings(@Param('id', ParseObjectIdPipe) id: string) {
+    return (await this.buildingsService.findAll({
+      map: id,
+    })) as Building[];
   }
 }

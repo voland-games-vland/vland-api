@@ -7,6 +7,6 @@ import { BuildingsController } from './buildings.controller';
   imports: [DatabaseModule],
   controllers: [BuildingsController],
   providers: [BuildingsService],
-  exports: [],
+  exports: [BuildingsService],
 })
 export class BuildingsModule {}
