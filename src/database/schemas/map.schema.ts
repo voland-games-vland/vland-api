@@ -1,6 +1,7 @@
 import { Prop, raw, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { Document } from 'mongoose';
 import { User } from './user.schema';
+import { MapSettings } from './map-settings.schema';
 
 export type MapDocument = Map & Document;
 
@@ -25,18 +26,8 @@ export class Map {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null })
   owner?: string;
 
-  @Prop(
-    raw({
-      teams: { type: Number, default: 2 },
-      scoreToWin: { type: Number, default: 1000 },
-      timeLimitInSeconds: { type: Number, default: 600 },
-    }),
-  )
-  settings: {
-    teams: number;
-    scoreToWin: number;
-    timeLimitInSeconds: number;
-  };
+  @Prop({ type: MapSettings, required: true })
+  settings: MapSettings;
 
   @Prop({ default: 30 })
   width: number;

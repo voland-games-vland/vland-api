@@ -3,8 +3,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model, FilterQuery } from 'mongoose';
 import { Block, BlockDocument } from 'src/database/schemas/block.schema';
 import { Map, MapDocument } from 'src/database/schemas/map.schema';
-import { CreateMapDto, Size } from './dto/create-map.dto';
-import { UpdateMapDto } from './dto/update-map.dto';
+import { MapCreateDto, Size } from './dto/map-create.dto';
+import { MapUpdateDto } from './dto/map-update.dto';
 
 @Injectable()
 export class MapsService {
@@ -16,9 +16,9 @@ export class MapsService {
     private readonly blockModel: Model<BlockDocument>,
   ) {}
 
-  async create(createMapDto: CreateMapDto, owner?: string) {
-    const newMap = new this.mapModel(createMapDto);
-    switch (createMapDto.size) {
+  async create(mapCreateDto: MapCreateDto, owner?: string) {
+    const newMap = new this.mapModel(mapCreateDto);
+    switch (mapCreateDto.size) {
       case Size.XS: {
         newMap.width = 15;
         newMap.height = 9;
@@ -57,8 +57,8 @@ export class MapsService {
     return await this.mapModel.findById(id).exec();
   }
 
-  async update(id: string, updateMapDto: UpdateMapDto) {
-    return await this.mapModel.findByIdAndUpdate(id, updateMapDto, {
+  async update(id: string, mapUpdateDto: MapUpdateDto) {
+    return await this.mapModel.findByIdAndUpdate(id, mapUpdateDto, {
       new: true,
     });
   }

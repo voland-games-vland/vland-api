@@ -1,3 +1,4 @@
+import { IsEnum, IsString } from 'class-validator';
 export enum Size {
   XS = 'XS',
   S = 'S',
@@ -6,7 +7,9 @@ export enum Size {
   XL = 'XL',
 }
 
-export class CreateMapDto {
+export class MapCreateDto {
+  @IsString()
   name: string;
+  @IsEnum(Size)
   size: Size = Size.M;
 }

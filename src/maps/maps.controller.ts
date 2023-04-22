@@ -17,8 +17,8 @@ import { BearerGuard } from 'src/guards/bearer.guard';
 import { FirebaseUser } from 'src/guards/firebaseUser.type';
 import { ParseObjectIdPipe } from 'src/pipes/parseObjectId.pipe';
 import { UsersService } from 'src/users/users.service';
-import { CreateMapDto } from './dto/create-map.dto';
-import { UpdateMapDto } from './dto/update-map.dto';
+import { MapCreateDto } from './dto/map-create.dto';
+import { MapUpdateDto } from './dto/map-update.dto';
 import { MapsService } from './maps.service';
 
 @ApiTags('maps')
@@ -35,10 +35,10 @@ export class MapsController {
   @ApiBearerAuth('Firebase Authentication')
   async create(
     @UserData() firebaseUser: FirebaseUser,
-    @Body() createMapDto: CreateMapDto,
+    @Body() mapCreateDto: MapCreateDto,
   ) {
     const user = await this.usersService.getUserByUid(firebaseUser.uid);
-    return (await this.mapsService.create(createMapDto, user._id)) as Map;
+    return (await this.mapsService.create(mapCreateDto, user._id)) as Map;
   }
 
   @Get()
@@ -54,9 +54,9 @@ export class MapsController {
   @Patch(':id')
   async update(
     @Param('id', ParseObjectIdPipe) id: string,
-    @Body() updateMapDto: UpdateMapDto,
+    @Body() mapUpdateDto: MapUpdateDto,
   ) {
-    return (await this.mapsService.update(id, updateMapDto)) as Map;
+    return (await this.mapsService.update(id, mapUpdateDto)) as Map;
   }
 
   @Delete(':id')
