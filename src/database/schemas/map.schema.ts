@@ -26,7 +26,7 @@ export class Map {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null })
   owner?: string;
 
-  @Prop({ type: MapSettings, required: true, default: new MapSettings() })
+  @Prop({ type: MapSettings, default: new MapSettings() })
   settings: MapSettings;
 
   @Prop({ default: 30 })
