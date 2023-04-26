@@ -8,6 +8,7 @@ import { FirebaseUser } from 'src/guards/firebaseUser.type';
 import { MapsService } from 'src/maps/maps.service';
 import { ParseObjectIdPipe } from 'src/pipes/parseObjectId.pipe';
 import { UsersService } from './users.service';
+import { Money } from 'src/database/schemas/money.schema';
 
 @ApiTags('users')
 @Controller('users')
@@ -23,6 +24,14 @@ export class UsersController {
   async getMe(@UserData() user: FirebaseUser) {
     const userMe = await this.usersService.getUserByUid(user.uid);
     return userMe as User;
+  }
+
+  @Get('me/money')
+  @UseGuards(BearerGuard)
+  @ApiBearerAuth('Firebase Authentication')
+  async getMeMoney(@UserData() user: FirebaseUser) {
+    const money = await this.usersService.getMoneyByUid(user.uid);
+    return money as Money;
   }
 
   @Get(':id/maps')

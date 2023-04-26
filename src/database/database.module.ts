@@ -5,6 +5,7 @@ import { Block, BlockSchema } from './schemas/block.schema';
 import { Building, BuildingSchema } from './schemas/building.schema';
 import { Map, MapSchema } from './schemas/map.schema';
 import { User, UserSchema } from './schemas/user.schema';
+import { Money, MoneySchema } from './schemas/money.schema';
 
 @Module({
   imports: [
@@ -32,6 +33,10 @@ import { User, UserSchema } from './schemas/user.schema';
       {
         name: Building.name,
         schema: BuildingSchema,
+      },
+      {
+        name: Money.name,
+        schema: MoneySchema,
       },
     ]),
   ],
