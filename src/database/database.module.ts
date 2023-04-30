@@ -6,6 +6,7 @@ import { Building, BuildingSchema } from './schemas/building.schema';
 import { Map, MapSchema } from './schemas/map.schema';
 import { User, UserSchema } from './schemas/user.schema';
 import { Money, MoneySchema } from './schemas/money.schema';
+import { Character, CharacterSchema } from './schemas/character.schema';
 
 @Module({
   imports: [
@@ -38,6 +39,10 @@ import { Money, MoneySchema } from './schemas/money.schema';
         name: Money.name,
         schema: MoneySchema,
       },
+      {
+        name: Character.name,
+        schema: CharacterSchema
+      }
     ]),
   ],
   exports: [MongooseModule],
