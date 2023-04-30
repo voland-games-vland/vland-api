@@ -10,6 +10,8 @@ import { ParseObjectIdPipe } from 'src/pipes/parseObjectId.pipe';
 import { UsersService } from './users.service';
 import { Money } from 'src/database/schemas/money.schema';
 import { UserNicknamePut } from './dto/user-nickname-put.dto';
+import { CharactersService } from 'src/characters/character.service';
+import { Character } from 'src/database/schemas/character.schema';
 
 @ApiTags('users')
 @Controller('users')
@@ -17,6 +19,7 @@ export class UsersController {
   constructor(
     private readonly usersService: UsersService,
     private readonly mapsService: MapsService,
+    private readonly charactersService: CharactersService
   ) {}
 
   @Get('me')
@@ -50,10 +53,18 @@ export class UsersController {
   }
 
   @Get(':id/maps')
-  async getMeMaps(@Param('id', ParseObjectIdPipe) id: string) {
+  async getUserMaps(@Param('id', ParseObjectIdPipe) id: string) {
     const maps = await this.mapsService.findAll({
       owner: id,
     });
     return maps as Map[];
+  }
+
+  @Get(':id/characters')
+  async getUserCharacters(@Param('id', ParseObjectIdPipe) id: string) {
+    const characters = await this.charactersService.findAll({
+      userId: id
+    })
+    return characters as Character[]
   }
 }

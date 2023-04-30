@@ -8,6 +8,6 @@ import { UsersModule } from 'src/users/users.module';
   imports: [DatabaseModule, forwardRef(() => UsersModule)],
   controllers: [CharactersController],
   providers: [CharactersService],
-  exports: [],
+  exports: [CharactersService],
 })
 export class CharactersModule {}
