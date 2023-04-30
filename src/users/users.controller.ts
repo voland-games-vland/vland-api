@@ -17,7 +17,7 @@ export class UsersController {
   constructor(
     private readonly usersService: UsersService,
     private readonly mapsService: MapsService,
-  ) { }
+  ) {}
 
   @Get('me')
   @UseGuards(BearerGuard)
@@ -38,8 +38,14 @@ export class UsersController {
   @Put('me/nickname')
   @UseGuards(BearerGuard)
   @ApiBearerAuth('Firebase Authentication')
-  async putMeName(@Body() userNicknamePut: UserNicknamePut, @UserData() user: FirebaseUser) {
-    const userMe = await this.usersService.updateUserNicknameByUid(user.uid, userNicknamePut.nickname);
+  async putMeName(
+    @Body() userNicknamePut: UserNicknamePut,
+    @UserData() user: FirebaseUser,
+  ) {
+    const userMe = await this.usersService.updateUserNicknameByUid(
+      user.uid,
+      userNicknamePut.nickname,
+    );
     return userMe as User;
   }
 

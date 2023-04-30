@@ -41,8 +41,8 @@ import { Character, CharacterSchema } from './schemas/character.schema';
       },
       {
         name: Character.name,
-        schema: CharacterSchema
-      }
+        schema: CharacterSchema,
+      },
     ]),
   ],
   exports: [MongooseModule],

@@ -1,7 +1,7 @@
 import { IsString, Length } from 'class-validator';
 
-export class UserNicknamePut {
-  @IsString()
+export class CharacterCreateDto {
   @Length(3, 30)
-  nickname: string;
+  @IsString()
+  name: string;
 }

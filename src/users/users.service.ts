@@ -12,7 +12,7 @@ export class UsersService {
     private readonly userModel: Model<UserDocument>,
     @InjectModel(Money.name)
     private readonly moneyModel: Model<MoneyDocument>,
-  ) { }
+  ) {}
 
   async getUserByUid(uid: string) {
     const userFirebase = await admin.auth().getUser(uid);
@@ -51,13 +51,19 @@ export class UsersService {
   }
 
   async updateUserNicknameByUid(uid: string, nickname: string) {
-    const user = await this.userModel.findOneAndUpdate({
-      uid: uid
-    }, {
-      nickname: nickname
-    }, {
-      new: true
-    }).exec()
-    return user
+    const user = await this.userModel
+      .findOneAndUpdate(
+        {
+          uid: uid,
+        },
+        {
+          nickname: nickname,
+        },
+        {
+          new: true,
+        },
+      )
+      .exec();
+    return user;
   }
 }

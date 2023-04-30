@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { FilterQuery, Model } from 'mongoose';
-import { Block, BlockDocument } from 'src/database/schemas/block.schema';
 import { Map, MapDocument } from 'src/database/schemas/map.schema';
 import { Position } from 'src/database/schemas/position.schema';
 import {

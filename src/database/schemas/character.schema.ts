@@ -4,14 +4,14 @@ import mongoose, { Document } from 'mongoose';
 export type CharacterDocument = Character & Document;
 
 export enum Weapon {
-    Sword = 'Sword',
-    Daggers = 'Daggers',
-    Hammer = 'Hammer',
-    Spear = 'Spear',
-    Bow = 'Bow',
-    Pistols = 'Pistols',
-    Sniper = 'Sniper'
-  }
+  Sword = 'Sword',
+  Daggers = 'Daggers',
+  Hammer = 'Hammer',
+  Spear = 'Spear',
+  Bow = 'Bow',
+  Pistols = 'Pistols',
+  Sniper = 'Sniper',
+}
 
 @Schema({
   timestamps: {

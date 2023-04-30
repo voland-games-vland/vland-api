@@ -9,6 +9,7 @@ import { UsersModule } from './users/users.module';
 import { BearerStrategy } from './guards/bearer.guard';
 import { AnonymousStrategy } from './guards/anonymous.guard';
 import { BuildingsModule } from './buildings/buildings.module';
+import { CharactersModule } from './characters/character.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { BuildingsModule } from './buildings/buildings.module';
     BlocksModule,
     UsersModule,
     BuildingsModule,
+    CharactersModule,
   ],
   controllers: [AppController],
   providers: [BearerStrategy, AnonymousStrategy],
