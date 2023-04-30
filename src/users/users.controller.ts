@@ -9,7 +9,7 @@ import { MapsService } from 'src/maps/maps.service';
 import { ParseObjectIdPipe } from 'src/pipes/parseObjectId.pipe';
 import { UsersService } from './users.service';
 import { Money } from 'src/database/schemas/money.schema';
-import { UserNicknamePut } from './dto/user-nickname-put.dto';
+import { UserNicknamePutDto } from './dto/user-nickname-put.dto';
 import { CharactersService } from 'src/characters/character.service';
 import { Character } from 'src/database/schemas/character.schema';
 
@@ -42,12 +42,12 @@ export class UsersController {
   @UseGuards(BearerGuard)
   @ApiBearerAuth('Firebase Authentication')
   async putMeName(
-    @Body() userNicknamePut: UserNicknamePut,
+    @Body() userNicknamePutDto: UserNicknamePutDto,
     @UserData() user: FirebaseUser,
   ) {
     const userMe = await this.usersService.updateUserNicknameByUid(
       user.uid,
-      userNicknamePut.nickname,
+      userNicknamePutDto.nickname,
     );
     return userMe as User;
   }

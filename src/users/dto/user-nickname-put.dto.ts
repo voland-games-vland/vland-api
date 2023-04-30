@@ -1,6 +1,6 @@
 import { IsString, Length } from 'class-validator';
 
-export class UserNicknamePut {
+export class UserNicknamePutDto {
   @IsString()
   @Length(3, 30)
   nickname: string;
