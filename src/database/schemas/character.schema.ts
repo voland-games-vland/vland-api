@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { Document } from 'mongoose';
+import { CharacterAttributes } from './characterAttributes.schema';
 
 export type CharacterDocument = Character & Document;
 
@@ -33,6 +34,9 @@ export class Character {
 
   @Prop({ type: String, enum: Weapon, required: true, default: Weapon.Sword })
   weaponType: Weapon;
+
+  @Prop({ type: CharacterAttributes, default: new CharacterAttributes() })
+  attributes: CharacterAttributes;
 }
 
 export const CharacterSchema = SchemaFactory.createForClass(Character);
