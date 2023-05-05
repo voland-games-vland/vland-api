@@ -32,21 +32,21 @@ export class BuildingsService {
       })
       .exec();
     if (building) {
-      building.type = buildingPutDto.type;
+      building.metadata = buildingPutDto.metadata
       building.position.x = buildingPutDto.position.x;
       building.position.y = buildingPutDto.position.y;
       building.position.z = buildingPutDto.position.z;
       return await building.save();
     }
 
-    const newBlock = new this.buildingModel();
-    newBlock.type = buildingPutDto.type;
-    newBlock.position = new Position();
-    newBlock.position.x = buildingPutDto.position.x;
-    newBlock.position.y = buildingPutDto.position.y;
-    newBlock.position.z = buildingPutDto.position.z;
-    newBlock.map = map._id;
-    return await newBlock.save();
+    const newBuilding = new this.buildingModel();
+    newBuilding.position = new Position();
+    newBuilding.metadata = buildingPutDto.metadata
+    newBuilding.position.x = buildingPutDto.position.x;
+    newBuilding.position.y = buildingPutDto.position.y;
+    newBuilding.position.z = buildingPutDto.position.z;
+    newBuilding.map = map._id;
+    return await newBuilding.save();
   }
 
   async findAll(query: FilterQuery<BuildingDocument> = {}) {
