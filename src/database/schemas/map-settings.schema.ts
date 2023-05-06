@@ -1,5 +1,5 @@
 import { Prop, Schema } from '@nestjs/mongoose';
-import { IsNumber } from 'class-validator';
+import { IsNumber, Min } from 'class-validator';
 
 @Schema({
   _id: false,
@@ -7,13 +7,16 @@ import { IsNumber } from 'class-validator';
 export class MapSettings {
   @Prop({ required: true, default: 2 })
   @IsNumber()
+  @Min(1)
   teams: number;
 
   @Prop({ required: true, default: 1000 })
   @IsNumber()
+  @Min(1)
   scoreToWin: number;
 
   @Prop({ required: true, default: 600 })
   @IsNumber()
+  @Min(60)
   timeLimitInSeconds: number;
 }
