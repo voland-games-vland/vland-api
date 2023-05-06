@@ -17,6 +17,5 @@ export class MapSettings {
 
   @Prop({ required: true, default: 600 })
   @IsNumber()
-  @Min(60)
   timeLimitInSeconds: number;
 }
