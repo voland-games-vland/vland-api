@@ -5,6 +5,7 @@ import { Block, BlockDocument } from 'src/database/schemas/block.schema';
 import { Map, MapDocument } from 'src/database/schemas/map.schema';
 import { MapCreateDto, Size } from './dto/map-create.dto';
 import { MapUpdateDto } from './dto/map-update.dto';
+import { Building, BuildingDocument } from 'src/database/schemas/building.schema';
 
 @Injectable()
 export class MapsService {
@@ -14,6 +15,9 @@ export class MapsService {
 
     @InjectModel(Block.name)
     private readonly blockModel: Model<BlockDocument>,
+
+    @InjectModel(Building.name)
+    private readonly buildingModel: Model<BuildingDocument>,
   ) {}
 
   async create(mapCreateDto: MapCreateDto, owner?: string) {
@@ -67,6 +71,9 @@ export class MapsService {
     await this.blockModel.deleteMany({
       map: id,
     });
+    await this.buildingModel.deleteMany({
+      map: id
+    })
     return await this.mapModel.findByIdAndRemove(id);
   }
 }
