@@ -5,7 +5,8 @@ export enum Building {
     CapturePoint = 'CapturePoint',
     Teleporter = 'Teleporter',
     Spawner = 'Spawner',
-  }
+    Pickup = 'Pickup'
+}
 
 @Schema({
     _id: false,

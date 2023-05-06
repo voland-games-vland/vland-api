@@ -3,6 +3,7 @@ import { Type } from 'class-transformer';
 import { IsMongoId, ValidateNested } from 'class-validator';
 import { BuildingMetadataType } from 'src/database/schemas/building.schema';
 import { BuildingMetadataCapturePoint } from 'src/database/schemas/buildingMetadataCapturePoint.schema';
+import { BuildingMetadataPickup } from 'src/database/schemas/buildingMetadataPickup.schema';
 import { BuildingMetadataSpawn } from 'src/database/schemas/buildingMetadataSpawn.schema';
 import { BuildingMetadataSpawner } from 'src/database/schemas/buildingMetadataSpawner.schema';
 import { BuildingMetadataTeleporter } from 'src/database/schemas/buildingMetadataTeleporter.schema';
@@ -21,6 +22,7 @@ export class BuildingPutDto {
       { $ref: getSchemaPath(BuildingMetadataSpawner) },
       { $ref: getSchemaPath(BuildingMetadataTeleporter) },
       { $ref: getSchemaPath(BuildingMetadataCapturePoint) },
+      { $ref: getSchemaPath(BuildingMetadataPickup) },
     ]
   })
   metadata: BuildingMetadataType

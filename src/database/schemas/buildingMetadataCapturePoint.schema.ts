@@ -8,7 +8,6 @@ export class BuildingMetadataCapturePoint {
 
     @Prop()
     team?: number
-
 }
 
 export const BuildingMetadataCapturePointSchema = SchemaFactory.createForClass(BuildingMetadataCapturePoint)

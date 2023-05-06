@@ -7,13 +7,14 @@ import { BuildingMetadataSpawn, BuildingMetadataSpawnSchema } from './buildingMe
 import { ApiExtraModels, ApiProperty, getSchemaPath } from '@nestjs/swagger';
 import { BuildingMetadataTeleporter, BuildingMetadataTeleporterSchema } from './buildingMetadataTeleporter.schema';
 import { BuildingMetadataCapturePoint, BuildingMetadataCapturePointSchema } from './buildingMetadataCapturePoint.schema';
+import { BuildingMetadataPickup, BuildingMetadataPickupSchema } from './buildingMetadataPickup.schema';
 
 export type BuildingDocument = Building & Document;
 
-export type BuildingMetadataType = BuildingMetadataSpawner | BuildingMetadataSpawn | BuildingMetadataTeleporter | BuildingMetadataCapturePoint
+export type BuildingMetadataType = BuildingMetadataSpawner | BuildingMetadataSpawn | BuildingMetadataTeleporter | BuildingMetadataCapturePoint | BuildingMetadataPickup
 
 @Schema()
-@ApiExtraModels(BuildingMetadataSpawner, BuildingMetadataSpawn, BuildingMetadataTeleporter, BuildingMetadataCapturePoint)
+@ApiExtraModels(BuildingMetadataSpawner, BuildingMetadataSpawn, BuildingMetadataTeleporter, BuildingMetadataCapturePoint, BuildingMetadataPickup)
 export class Building {
   _id: string;
 
@@ -30,6 +31,7 @@ export class Building {
       { $ref: getSchemaPath(BuildingMetadataSpawner) },
       { $ref: getSchemaPath(BuildingMetadataTeleporter) },
       { $ref: getSchemaPath(BuildingMetadataCapturePoint) },
+      { $ref: getSchemaPath(BuildingMetadataPickup) },
     ]
   })
   metadata: BuildingMetadataType;
@@ -43,5 +45,6 @@ subdocument.discriminator('Spawner', BuildingMetadataSpawnerSchema)
 subdocument.discriminator('Spawn', BuildingMetadataSpawnSchema)
 subdocument.discriminator('Teleporter', BuildingMetadataTeleporterSchema)
 subdocument.discriminator('CapturePoint', BuildingMetadataCapturePointSchema)
+subdocument.discriminator('Pickup', BuildingMetadataPickupSchema)
 
 BuildingSchema.index({ position: 1, map: 1 }, { unique: true });
