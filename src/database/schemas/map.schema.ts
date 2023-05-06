@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { Document } from 'mongoose';
-import { MapSettings } from './map-settings.schema';
+import { MapSettings } from './mapSettings.schema';
 
 export type MapDocument = Map & Document;
 
