@@ -1,5 +1,12 @@
 import { Prop, Schema } from '@nestjs/mongoose';
-import { IsNumber, Min } from 'class-validator';
+import { IsEnum, IsNumber, Min } from 'class-validator';
+
+export enum Daytime {
+  Morning = 'Morning',
+  Afternoon = 'Afternoon',
+  Dawn = 'Dawn',
+  Night = 'Night',
+}
 
 @Schema({
   _id: false,
@@ -18,4 +25,8 @@ export class MapSettings {
   @Prop({ required: true, default: 600 })
   @IsNumber()
   timeLimitInSeconds: number;
+
+  @Prop({ type: String, enum: Daytime, required: true, default: Daytime.Morning })
+  @IsEnum(Daytime)
+  daytime: Daytime;
 }
