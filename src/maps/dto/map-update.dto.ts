@@ -1,11 +1,13 @@
 import { Type } from 'class-transformer';
-import { IsString, ValidateNested } from 'class-validator';
+import { IsOptional, IsString, ValidateNested } from 'class-validator';
 import { MapSettings } from 'src/database/schemas/mapSettings.schema';
 
 export class MapUpdateDto {
   @IsString()
-  name: string;
+  @IsOptional()
+  name?: string;
   @ValidateNested()
   @Type(() => MapSettings)
-  settings: MapSettings;
+  @IsOptional()
+  settings?: MapSettings;
 }
