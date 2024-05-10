@@ -1,5 +1,8 @@
 export default () => {
+  console.log(process.env.FIREBASE_PRIVATE_KEY)
+  console.log(JSON.parse(process.env.FIREBASE_PRIVATE_KEY))
   const { privateKey } = JSON.parse(process.env.FIREBASE_PRIVATE_KEY)
+    console.log(privateKey)
     return {
     port: parseInt(process.env.PORT, 10) || 3001,
     database: {
