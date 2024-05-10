@@ -11,7 +11,7 @@ async function bootstrap() {
 
   const adminConfig: admin.ServiceAccount = {
     projectId: configService.get('firebase.projectId'),
-    privateKey: configService.get('firebase.privateKey'),
+    privateKey: configService.get('firebase.privateKey').replace(/\\n/g, '\n').replace(/\\\\n/g, '\n'),
     clientEmail: configService.get('firebase.clientEmail'),
   };
 

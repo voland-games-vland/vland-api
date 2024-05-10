@@ -1,8 +1,7 @@
 export default () => {
   console.log(process.env.FIREBASE_PRIVATE_KEY)
-  console.log(JSON.parse(process.env.FIREBASE_PRIVATE_KEY))
-  const { privateKey } = JSON.parse(process.env.FIREBASE_PRIVATE_KEY)
-    console.log(privateKey)
+  const cleanKey = process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n').replace(/\\\\n/g, '\n')
+  console.log(cleanKey)
     return {
     port: parseInt(process.env.PORT, 10) || 3001,
     database: {
@@ -14,7 +13,7 @@ export default () => {
     firebase: {
       projectId: process.env.FIREBASE_PROJECT_ID,
       clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-      privateKey: privateKey,
+      privateKey: process.env.FIREBASE_PRIVATE_KEY,
     },
   }
 };
